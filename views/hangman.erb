@@ -1,28 +1,24 @@
 <html>
   <head>
-    <style>
-      body {
-        background: yellow;
-      }
-    </style>
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <h1 > Hangman </h1>
     <p>
       
     </p>
-  	<form method="post" action="/hangman/guess">
+    <form method="post" action="/hangman/guess">
       <input type='text' name='guess' />
-      <input type='submit' value='Encrypt' href="/guess" />
+      <input type='submit' value='Guess' />
     </form>
     <p>
-      "Your name :"
+      <%= session[:hangman].chooseImage%>
       <%=
-        "#{session[:name]}"
-      %>
-      <%= 
-        "#{session[:hangman].word}"
+        "#{session[:hangman].displayProgress}"
       %>
     </p>
+     <form method="post" action="/hangman/load">
+      <input type='submit' value='Load' />
+    </form>
   </body>
 </html>

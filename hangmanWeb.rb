@@ -4,26 +4,33 @@ class Hangman
 
 	attr_reader :word, :wordCompletion
 
-	def initialize(wordCompletion = nil, lettersGuessed = nil, word = nil)
-		@wordCompletion = Array.new
-		@lettersGuessed = Array.new
-		@turn = 0
-		lines = File.readlines "5desk.txt"
-		randomIndex =  rand(61406)
-		lines.each_with_index do |line,index|
-			if (index == randomIndex)
-				checkSize = true
-				while (checkSize)
-					if (lines[index].chomp.downcase.size >= 5 && lines[index].chomp.downcase.size <= 12)
-						@word = lines[index].chomp.downcase
-						checkSize = false;
+	def initialize(jsonLoad = nil, wordCompletion = nil, lettersGuessed = nil, word = nil)
+		if (jsonLoad != nil)
+			@wordCompletion = jsonLoad['wordCompletion']
+			@lettersGuessed = jsonLoad['lettersGuessed']
+			@word = jsonLoad['word']
+			@turn = jsonLoad['turn']
+		else
+			@wordCompletion = Array.new
+			@lettersGuessed = Array.new
+			@turn = 0
+			lines = File.readlines "5desk.txt"
+			randomIndex =  rand(61406)
+			lines.each_with_index do |line,index|
+				if (index == randomIndex)
+					checkSize = true
+					while (checkSize)
+						if (lines[index].chomp.downcase.size >= 5 && lines[index].chomp.downcase.size <= 12)
+							@word = lines[index].chomp.downcase
+							checkSize = false;
+						end
+						index += 1;
 					end
-					index += 1;
 				end
 			end
-		end
-		for i in 0...@word.size
-			@wordCompletion.push('_')
+			for i in 0...@word.size
+				@wordCompletion.push('_')
+			end
 		end
 	end
 
@@ -43,6 +50,13 @@ class Hangman
 	end
 
 	def checkGuess(letter)
+		lettre = letter.downcase
+		if (letter.size != 1)
+			return nil
+		end
+		if (letter.ord > 122 || letter.ord < 97)
+			return nil
+		end
 		if (!(!@wordCompletion.include?(letter) && !@lettersGuessed.include?(letter)))
 			return nil
 		end
@@ -122,6 +136,10 @@ class Hangman
 		else
 			return true
 		end
+	end
+
+	def save
+		return to_json
 	end
 
 end

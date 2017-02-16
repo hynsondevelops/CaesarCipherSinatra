@@ -1,13 +1,9 @@
 <html>
   <head>
-    <style>
-      body {
-        background: yellow;
-      }
-    </style>
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-    <h1 > Hangman Guess Page </h1>
+    <h1 > Hangman </h1>
     <p>
       
     </p>
@@ -17,6 +13,8 @@
     </form>
     <p>
       <%= session[:hangman].chooseImage%>
+    </p>
+    <p>
       <%= 
         "#{guessMessage}"
       %>
@@ -24,5 +22,8 @@
         "#{session[:hangman].displayProgress}"
       %>
     </p>
+    <form method="post" action="/hangman/save">
+      <input type='submit' value='Save' />
+    </form>
   </body>
 </html>

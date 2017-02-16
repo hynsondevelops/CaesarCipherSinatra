@@ -39,7 +39,7 @@ end
 post '/hangman/guess' do
 	status = session[:hangman].checkGuess(params[:guess])
 	if (status == nil)
-		guessMessage = "Letter already guessed"
+		guessMessage = "Letter already guessed or invalid"
 	elsif (status == false)
 		guessMessage = "Letter not in word"
 	elsif (status == true)
@@ -57,3 +57,16 @@ post '/hangman/guess' do
 		erb :hangmanGuess, :locals => {:guessMessage => guessMessage}	
 	end
 end
+
+post '/hangman/save' do
+	session[:save] = session[:hangman]
+	erb :index
+end
+
+post '/hangman/load' do
+	session[:hangman] = session[:save]
+	guessMessage = "Welcome back!"
+	erb :hangmanGuess, :locals => {:guessMessage => guessMessage}
+end
+
+
