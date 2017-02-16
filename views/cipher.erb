@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <style>
+      body {
+        background: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 > Caesar Cipher Encoding </h1>
+  	<form>
+      <input type='text' name='message' />
+      <input type='text' name='shift' />
+      <input type='submit' value='Encrypt' />
+    </form>
+    <p>
+      "Your name :"
+      <%=
+        "#{session[:name]}"
+      %>
+      "Your encrypted message :"
+      <%=
+        "#{encrypted}"
+      %>
+    </p>
+  </body>
+</html>

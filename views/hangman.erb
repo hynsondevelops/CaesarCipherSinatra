@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <style>
+      body {
+        background: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 > Hangman </h1>
+    <p>
+      
+    </p>
+  	<form method="post" action="/hangman/guess">
+      <input type='text' name='guess' />
+      <input type='submit' value='Encrypt' href="/guess" />
+    </form>
+    <p>
+      "Your name :"
+      <%=
+        "#{session[:name]}"
+      %>
+      <%= 
+        "#{session[:hangman].word}"
+      %>
+    </p>
+  </body>
+</html>

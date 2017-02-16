@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <style>
+      body {
+        background: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 > Game Over </h1> 
+    <%= "#{winOrLose}" %>
+    <p>
+      <%= session[:hangman].chooseImage%>
+    </p>
+    <p>
+      The word was <%=session[:hangman].word%>
+    </p>
+  </body>
+</html>
